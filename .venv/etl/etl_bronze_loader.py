@@ -4,8 +4,8 @@ import pyodbc
 from kaggle.api.kaggle_api_extended import KaggleApi
 from datetime import datetime
 
-# Set Kaggle credentials path (optional if set globally)
-os.environ['KAGGLE_CONFIG_DIR'] = r"C:\Users\sakhe\.kaggle"  # Adjust if needed
+# Set Kaggle credentials path 
+os.environ['KAGGLE_CONFIG_DIR'] = r"C:\Users\sakhe\.kaggle"  
 
 def download_dataset():
     api = KaggleApi()
