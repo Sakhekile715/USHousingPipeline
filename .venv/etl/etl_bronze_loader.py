@@ -5,6 +5,7 @@ from kaggle.api.kaggle_api_extended import KaggleApi
 from datetime import datetime
 from dotenv import load_dotenv
 
+
 # Load environment variables
 load_dotenv()
 
@@ -16,6 +17,9 @@ SQL_DATABASE = os.getenv("SQL_DATABASE")
 
 # Set Kaggle credentials path
 os.environ['KAGGLE_CONFIG_DIR'] = KAGGLE_CONFIG_DIR
+=======
+# Set Kaggle credentials path 
+os.environ['KAGGLE_CONFIG_DIR'] = r"C:\Users\sakhe\.kaggle"  
 
 def download_dataset():
     api = KaggleApi()
