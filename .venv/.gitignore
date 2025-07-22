@@ -24,3 +24,7 @@ data/final/
 # OS files
 .DS_Store
 Thumbs.db
+
+.venv/.env
+
+

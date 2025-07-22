@@ -1,13 +1,18 @@
 import pyodbc
+import os
+from dotenv import load_dotenv
 
-# Use ODBC Driver 17 or 18 as installed
-driver = '{ODBC Driver 17 for SQL Server}'
-server = 'SAKHEKILE\SQLEXPRESS'
-database = 'USHousingETL'
+# Load .env file
+load_dotenv()
 
-# Windows Authentication
+# Get values from .env
+driver = os.getenv("SQL_DRIVER")
+server = os.getenv("SQL_SERVER")
+database = os.getenv("SQL_DATABASE")
+
+# Connection string
 conn_str = f"""
-    DRIVER={driver};
+    DRIVER={{{driver}}};
     SERVER={server};
     DATABASE={database};
     Trusted_Connection=yes;
@@ -22,4 +27,5 @@ try:
     conn.close()
 except Exception as e:
     print("❌ Connection failed:", str(e))
+
 

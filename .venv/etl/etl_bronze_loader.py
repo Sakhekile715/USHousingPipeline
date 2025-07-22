@@ -3,9 +3,19 @@ import pandas as pd
 import pyodbc
 from kaggle.api.kaggle_api_extended import KaggleApi
 from datetime import datetime
+from dotenv import load_dotenv
 
-# Set Kaggle credentials path (optional if set globally)
-os.environ['KAGGLE_CONFIG_DIR'] = r"C:\Users\sakhe\.kaggle"  # Adjust if needed
+# Load environment variables
+load_dotenv()
+
+# Get values from .env
+KAGGLE_CONFIG_DIR = os.getenv("KAGGLE_CONFIG_DIR")
+SQL_DRIVER = os.getenv("SQL_DRIVER")
+SQL_SERVER = os.getenv("SQL_SERVER")
+SQL_DATABASE = os.getenv("SQL_DATABASE")
+
+# Set Kaggle credentials path
+os.environ['KAGGLE_CONFIG_DIR'] = KAGGLE_CONFIG_DIR
 
 def download_dataset():
     api = KaggleApi()
@@ -29,9 +39,9 @@ def load_csv_to_df():
 def insert_into_sql(df):
     print("🧩 Inserting data into SQL Server...")
     conn = pyodbc.connect(
-        "DRIVER={ODBC Driver 18 for SQL Server};"
-        r"SERVER=SAKHEKILE\SQLEXPRESS;"
-        "DATABASE=USHousingETL;"
+        f"DRIVER={{{SQL_DRIVER}}};"
+        f"SERVER={SQL_SERVER};"
+        f"DATABASE={SQL_DATABASE};"
         "Trusted_Connection=yes;"
         "Encrypt=no;"
     )
@@ -64,3 +74,4 @@ if __name__ == "__main__":
     df = load_csv_to_df()
     insert_into_sql(df)
     print(f"🏁 Finished ETL: {datetime.now()}")
+
